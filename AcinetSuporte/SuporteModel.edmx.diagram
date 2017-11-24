@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2f92188699414e008ab4e60a90c08af3" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="SuporteModel.APPCorrection" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.APPFeature" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Application" Width="1.5" PointX="3.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.BArea" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Client" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.ClientContact" Width="1.5" PointX="3.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Colaborador" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Departamento" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Documeto" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Priority" Width="1.5" PointX="3.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.State" Width="1.5" PointX="3.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.TipoDocumento" Width="1.5" PointX="3.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuporteModel.Version" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SuporteModel.FK_APPCorrection_Documeto" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Correction_Correction" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_APPFeature_Documeto" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_APPFeature_Version" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Version_Application" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Client_BArea" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_BArea" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_ClientContact" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_ClienteContact2" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Departamento_Colaborador" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_Colaborador" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_Colaborador1" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_Priority" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_State" ManuallyRouted="false" />
+        <AssociationConnector Association="SuporteModel.FK_Documeto_TipoDocumento" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

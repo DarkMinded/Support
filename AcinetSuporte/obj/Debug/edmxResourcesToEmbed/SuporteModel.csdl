@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SuporteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="APPCorrection">
+    <Key>
+      <PropertyRef Name="CorrectionID" />
+    </Key>
+    <Property Name="CorrectionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="BugDocumentId" Type="Int64" Nullable="false" />
+    <Property Name="VersionId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Documeto" Relationship="Self.FK_APPCorrection_Documeto" FromRole="APPCorrection" ToRole="Documeto" />
+    <NavigationProperty Name="Version" Relationship="Self.FK_Correction_Correction" FromRole="APPCorrection" ToRole="Version" />
+  </EntityType>
+  <EntityType Name="APPFeature">
+    <Key>
+      <PropertyRef Name="FeatureId" />
+    </Key>
+    <Property Name="FeatureId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="VersionId" Type="Int64" Nullable="false" />
+    <Property Name="DocumentoOrigem" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Documeto" Relationship="Self.FK_APPFeature_Documeto" FromRole="APPFeature" ToRole="Documeto" />
+    <NavigationProperty Name="Version" Relationship="Self.FK_APPFeature_Version" FromRole="APPFeature" ToRole="Version" />
+  </EntityType>
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Versions" Relationship="Self.FK_Version_Application" FromRole="Application" ToRole="Version" />
+  </EntityType>
+  <EntityType Name="BArea">
+    <Key>
+      <PropertyRef Name="BAreaID" />
+    </Key>
+    <Property Name="BAreaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Client_BArea" FromRole="BArea" ToRole="Client" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_BArea" FromRole="BArea" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GTTId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PRIId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="BAreaID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="BArea" Relationship="Self.FK_Client_BArea" FromRole="Client" ToRole="BArea" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_Client" FromRole="Client" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="ClientContact">
+    <Key>
+      <PropertyRef Name="ClienteContactId" />
+    </Key>
+    <Property Name="ClienteContactId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_ClientContact" FromRole="ClientContact" ToRole="Documeto" />
+    <NavigationProperty Name="Documetoes1" Relationship="Self.FK_Documeto_ClienteContact2" FromRole="ClientContact" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="Colaborador">
+    <Key>
+      <PropertyRef Name="ColaboradorId" />
+    </Key>
+    <Property Name="ColaboradorId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CellPhone" Type="String" MaxLength="21" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Departamentoes" Relationship="Self.FK_Departamento_Colaborador" FromRole="Colaborador" ToRole="Departamento" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_Colaborador" FromRole="Colaborador" ToRole="Documeto" />
+    <NavigationProperty Name="Documetoes1" Relationship="Self.FK_Documeto_Colaborador1" FromRole="Colaborador" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="DepartamentoID" />
+    </Key>
+    <Property Name="DepartamentoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ResponsavelId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Colaborador" Relationship="Self.FK_Departamento_Colaborador" FromRole="Departamento" ToRole="Colaborador" />
+  </EntityType>
+  <EntityType Name="Documeto">
+    <Key>
+      <PropertyRef Name="DocumentId" />
+    </Key>
+    <Property Name="DocumentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoDocumentoId" Type="Int64" Nullable="false" />
+    <Property Name="BAreaId" Type="Int64" Nullable="false" />
+    <Property Name="ClientId" Type="Int64" Nullable="false" />
+    <Property Name="ClientContactId" Type="Int64" Nullable="false" />
+    <Property Name="TicketId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ResponsavelId" Type="Int64" />
+    <Property Name="Orcamentado" Type="Boolean" Nullable="false" />
+    <Property Name="OrcamentadoPor" Type="Int64" Nullable="false" />
+    <Property Name="AdjudicadoPor" Type="Int64" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="DeliverDate" Type="DateTime" Precision="3" />
+    <Property Name="EspectedDate" Type="DateTime" Precision="3" />
+    <Property Name="StateId" Type="Int64" />
+    <Property Name="Progress" Type="Double" Nullable="false" />
+    <Property Name="AdjudicadoEm" Type="DateTime" Precision="3" />
+    <Property Name="OrcamentadoEm" Type="DateTime" Precision="3" />
+    <Property Name="Assunto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Descricao" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="DescricaoFact" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="DescricaoTec" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="TempoPrevisto" Type="Int64" />
+    <Property Name="TempoImputar" Type="Int64" />
+    <Property Name="TempoGasto" Type="Int64" />
+    <Property Name="PriorityId" Type="Int64" Nullable="false" />
+    <Property Name="Visible" Type="Boolean" Nullable="false" />
+    <Property Name="System" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="APPCorrections" Relationship="Self.FK_APPCorrection_Documeto" FromRole="Documeto" ToRole="APPCorrection" />
+    <NavigationProperty Name="APPFeatures" Relationship="Self.FK_APPFeature_Documeto" FromRole="Documeto" ToRole="APPFeature" />
+    <NavigationProperty Name="BArea" Relationship="Self.FK_Documeto_BArea" FromRole="Documeto" ToRole="BArea" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Documeto_Client" FromRole="Documeto" ToRole="Client" />
+    <NavigationProperty Name="ClientContact" Relationship="Self.FK_Documeto_ClientContact" FromRole="Documeto" ToRole="ClientContact" />
+    <NavigationProperty Name="ClientContact1" Relationship="Self.FK_Documeto_ClienteContact2" FromRole="Documeto" ToRole="ClientContact" />
+    <NavigationProperty Name="Colaborador" Relationship="Self.FK_Documeto_Colaborador" FromRole="Documeto" ToRole="Colaborador" />
+    <NavigationProperty Name="Colaborador1" Relationship="Self.FK_Documeto_Colaborador1" FromRole="Documeto" ToRole="Colaborador" />
+    <NavigationProperty Name="Priority" Relationship="Self.FK_Documeto_Priority" FromRole="Documeto" ToRole="Priority" />
+    <NavigationProperty Name="State" Relationship="Self.FK_Documeto_State" FromRole="Documeto" ToRole="State" />
+    <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Documeto_TipoDocumento" FromRole="Documeto" ToRole="TipoDocumento" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="PriorityId" />
+    </Key>
+    <Property Name="PriorityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PLevel" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_Priority" FromRole="Priority" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isFinal" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_State" FromRole="State" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="TipoDocumento">
+    <Key>
+      <PropertyRef Name="TipoDocumentoID" />
+    </Key>
+    <Property Name="TipoDocumentoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Documetoes" Relationship="Self.FK_Documeto_TipoDocumento" FromRole="TipoDocumento" ToRole="Documeto" />
+  </EntityType>
+  <EntityType Name="Version">
+    <Key>
+      <PropertyRef Name="VersionId" />
+    </Key>
+    <Property Name="VersionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="ApplicationId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="APPCorrections" Relationship="Self.FK_Correction_Correction" FromRole="Version" ToRole="APPCorrection" />
+    <NavigationProperty Name="APPFeatures" Relationship="Self.FK_APPFeature_Version" FromRole="Version" ToRole="APPFeature" />
+    <NavigationProperty Name="Application" Relationship="Self.FK_Version_Application" FromRole="Version" ToRole="Application" />
+  </EntityType>
+  <Association Name="FK_APPCorrection_Documeto">
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="1" />
+    <End Role="APPCorrection" Type="Self.APPCorrection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documeto">
+        <PropertyRef Name="DocumentId" />
+      </Principal>
+      <Dependent Role="APPCorrection">
+        <PropertyRef Name="BugDocumentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Correction_Correction">
+    <End Role="Version" Type="Self.Version" Multiplicity="1" />
+    <End Role="APPCorrection" Type="Self.APPCorrection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Version">
+        <PropertyRef Name="VersionId" />
+      </Principal>
+      <Dependent Role="APPCorrection">
+        <PropertyRef Name="VersionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APPFeature_Documeto">
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="1" />
+    <End Role="APPFeature" Type="Self.APPFeature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documeto">
+        <PropertyRef Name="DocumentId" />
+      </Principal>
+      <Dependent Role="APPFeature">
+        <PropertyRef Name="DocumentoOrigem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APPFeature_Version">
+    <End Role="Version" Type="Self.Version" Multiplicity="1" />
+    <End Role="APPFeature" Type="Self.APPFeature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Version">
+        <PropertyRef Name="VersionId" />
+      </Principal>
+      <Dependent Role="APPFeature">
+        <PropertyRef Name="VersionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Version_Application">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="Version" Type="Self.Version" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="Version">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_BArea">
+    <End Role="BArea" Type="Self.BArea" Multiplicity="1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BArea">
+        <PropertyRef Name="BAreaID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="BAreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_BArea">
+    <End Role="BArea" Type="Self.BArea" Multiplicity="1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BArea">
+        <PropertyRef Name="BAreaID" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="BAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_ClientContact">
+    <End Role="ClientContact" Type="Self.ClientContact" Multiplicity="1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientContact">
+        <PropertyRef Name="ClienteContactId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="ClientContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_ClienteContact2">
+    <End Role="ClientContact" Type="Self.ClientContact" Multiplicity="0..1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientContact">
+        <PropertyRef Name="ClienteContactId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="AdjudicadoPor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Departamento_Colaborador">
+    <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="1" />
+    <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colaborador">
+        <PropertyRef Name="ColaboradorId" />
+      </Principal>
+      <Dependent Role="Departamento">
+        <PropertyRef Name="ResponsavelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_Colaborador">
+    <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colaborador">
+        <PropertyRef Name="ColaboradorId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="OrcamentadoPor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_Colaborador1">
+    <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="0..1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colaborador">
+        <PropertyRef Name="ColaboradorId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="ResponsavelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_Priority">
+    <End Role="Priority" Type="Self.Priority" Multiplicity="1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="PriorityId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="PriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_State">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documeto_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+    <End Role="Documeto" Type="Self.Documeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="TipoDocumentoID" />
+      </Principal>
+      <Dependent Role="Documeto">
+        <PropertyRef Name="TipoDocumentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="APPCorrections" EntityType="Self.APPCorrection" />
+    <EntitySet Name="APPFeatures" EntityType="Self.APPFeature" />
+    <EntitySet Name="Applications" EntityType="Self.Application" />
+    <EntitySet Name="BAreas" EntityType="Self.BArea" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="ClientContacts" EntityType="Self.ClientContact" />
+    <EntitySet Name="Colaboradors" EntityType="Self.Colaborador" />
+    <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+    <EntitySet Name="Documetoes" EntityType="Self.Documeto" />
+    <EntitySet Name="Priorities" EntityType="Self.Priority" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="TipoDocumentoes" EntityType="Self.TipoDocumento" />
+    <EntitySet Name="Versions" EntityType="Self.Version" />
+    <AssociationSet Name="FK_APPCorrection_Documeto" Association="Self.FK_APPCorrection_Documeto">
+      <End Role="Documeto" EntitySet="Documetoes" />
+      <End Role="APPCorrection" EntitySet="APPCorrections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Correction_Correction" Association="Self.FK_Correction_Correction">
+      <End Role="Version" EntitySet="Versions" />
+      <End Role="APPCorrection" EntitySet="APPCorrections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APPFeature_Documeto" Association="Self.FK_APPFeature_Documeto">
+      <End Role="Documeto" EntitySet="Documetoes" />
+      <End Role="APPFeature" EntitySet="APPFeatures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APPFeature_Version" Association="Self.FK_APPFeature_Version">
+      <End Role="Version" EntitySet="Versions" />
+      <End Role="APPFeature" EntitySet="APPFeatures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Version_Application" Association="Self.FK_Version_Application">
+      <End Role="Application" EntitySet="Applications" />
+      <End Role="Version" EntitySet="Versions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_BArea" Association="Self.FK_Client_BArea">
+      <End Role="BArea" EntitySet="BAreas" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_BArea" Association="Self.FK_Documeto_BArea">
+      <End Role="BArea" EntitySet="BAreas" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_Client" Association="Self.FK_Documeto_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_ClientContact" Association="Self.FK_Documeto_ClientContact">
+      <End Role="ClientContact" EntitySet="ClientContacts" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_ClienteContact2" Association="Self.FK_Documeto_ClienteContact2">
+      <End Role="ClientContact" EntitySet="ClientContacts" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Departamento_Colaborador" Association="Self.FK_Departamento_Colaborador">
+      <End Role="Colaborador" EntitySet="Colaboradors" />
+      <End Role="Departamento" EntitySet="Departamentoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_Colaborador" Association="Self.FK_Documeto_Colaborador">
+      <End Role="Colaborador" EntitySet="Colaboradors" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_Colaborador1" Association="Self.FK_Documeto_Colaborador1">
+      <End Role="Colaborador" EntitySet="Colaboradors" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_Priority" Association="Self.FK_Documeto_Priority">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_State" Association="Self.FK_Documeto_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documeto_TipoDocumento" Association="Self.FK_Documeto_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumentoes" />
+      <End Role="Documeto" EntitySet="Documetoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
